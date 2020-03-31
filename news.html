@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>纸网天下</title>
+	<meta name="referrer" content="no-referrer" />
+	<!-- <meta name="viewport" content="width=device-width,initial-scale=1"> -->
+	<!-- // 设置理想视口，使得DOM宽度(layout viewport)与屏幕宽度(visual viewport)一样大，DOM文档主宽度即为屏幕宽度，1个CSS像素（1px）由多少设备像素显示由具体设备而不同； -->
+	<!-- <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"> -->
+</head>
+<style>
+	/* 方便开发使用* 上线的时候把常见有间距标签改一下就好了 */
+
+	* {
+		margin: 0;
+		padding: 0;
+		/* 给所有元素设置这个盒模型属性为了让盒模型的和设置的宽度一样 
+   因为移动端做全屏页面宽度100% 如果因为边框或者padding导致超出范围出现滚动条不利于用户体验 */
+		box-sizing: border-box;
+		/* 设置移动端点击高亮背景色  去掉就设置为透明颜色即可*/
+		-webkit-tap-highlight-color: transparent;
+		/* 设置文字允许字体小于12px; */
+		-webkit-text-size-adjust: none;
+		/* 防止文字的锯齿样式 */
+		-webkit-font-smoothing: antialiased;
+	}
+
+	html {
+		/*16px * 312.5% = 50px;*/
+		/*font-size: 312.5%;*/
+		font-size: 250%;
+	}
+
+	/* 给body设置字体默认样式 */
+
+	body {
+		/*3       font-size: 0.6rem;
+4       font-size\0:28px;*/
+		font-size: 0.5rem;
+		font-family: -apple-system, Helvetica, sans-serif;
+		line-height: 1.5;
+	}
+
+	.logo {
+		height: 100px;
+		line-height: 100px;
+		margin-top: 25px;
+		margin-left: 10px;
+		margin-bottom: 10px;
+	}
+
+	.logo img {
+		width: 260px;
+		height: 80px;
+		padding: 0 10px;
+		float: left;
+	}
+
+	.news {
+		font-size: 32px;
+		color: #dd2b2b;
+		float: left;
+		margin-left: 50px;
+	}
+
+	.tit {
+		width: 100%;
+		/* height: 100px; */
+		font-size: 52px;
+		/* line-height: 100px; */
+		font-weight: 900;
+		padding-left: 20px;
+		color: #000000;
+	}
+
+	.header {
+		height: 60px;
+		/* line-height: 60px; */
+		font-size: 24px;
+		margin: 0px aotu 10px;
+		padding: 10px 20px;
+	}
+
+	.header .time {
+		color: #999999;
+		font-size: 26px;
+		padding-right: 20px;
+		float: left;
+	}
+
+	.header .wenzi {
+		font-size: 26px;
+		color: #999999;
+		float: left;
+		padding-right: 16px;
+	}
+
+	.header .wenzi1 {
+		font-size: 26px;
+		color: #999999;
+		float: left;
+		padding-right: 16px;
+	}
+
+	.header .wenzi2 {
+		font-size: 26px;
+		color: #999999;
+		float: left;
+		padding-right: 16px;
+	}
+
+	.header img {
+		width: 42px;
+		height: 30px;
+		float: left;
+		padding-right: 10px;
+	}
+
+	#conten {
+		width: 100% !important;
+		/* padding-left: 20px; */
+		padding: 0 20px !important;
+		font-size: 40px !important;
+	}
+
+	#conten .ql-align-justify {
+		letter-spacing: 2px;
+	}
+
+	p img {
+		margin-top: 40px;
+		width: 100%;
+	}
+
+	section img {
+		width: 100%;
+	}
+
+	.foot {
+		float: left;
+		width: 100%;
+		background-color: #133d76;
+		text-align: center;
+		margin-bottom: 160px;
+		color: #cccccc;
+		margin-top: 20px;
+	}
+
+	.left {
+		float: left;
+		text-align: left;
+		font-size: 26px;
+		padding-left: 20px;
+		/* color: #000000; */
+		color: #cccccc;
+	}
+
+	.left .lixian {
+		/* color: #000000; */
+		color: #cccccc;
+		font-weight: 700;
+		font-size: 30px;
+	}
+
+	.left .name {
+		padding-top: 10px;
+	}
+
+	.left .dizhi {
+		padding-top: 10px;
+	}
+
+	.left .wangzhi {
+		padding-top: 10px;
+	}
+
+	.left .wangzhi a {
+		/* color: #000000; */
+		color: #cccccc;
+	}
+
+	.right {
+		float: right;
+		padding-right: 20px;
+	}
+
+	.right img {
+		vertical-align: middle;
+		float: left;
+	}
+
+	.right .guanzhu {
+		font-size: 30px;
+		font-weight: 700;
+		/* color: #000000; */
+		color: #cccccc;
+	}
+
+	/* .right .xiaochengxu{
+        display:none
+    }
+    .right .anzhuo{
+        display:none
+    }
+    .right .ios{
+        display:none
+    } */
+
+	.foot .APP {
+		position: fixed;
+		bottom: 0px;
+		height: 160px;
+		width: 100%;
+		background-color: #fff;
+		font-size: 36px;
+		line-height: 160px;
+		text-align: center;
+	}
+
+	.foot .APP a {
+		color: #dd2b2b;
+		height: 160px;
+		line-height: 160px;
+		float: right;
+		text-decoration: none;
+		margin-right: 20px;
+	}
+
+	.foot .APP img {
+		padding: 10px 10px;
+		height: 110px;
+		float: left;
+		margin-top: 25px;
+	}
+
+	.readall_box {
+		position: relative;
+		z-index: 9999;
+		padding: 0 0 25px;
+		margin-top: -200px;
+		text-align: center;
+	}
+
+	.readall_box .read_more_mask {
+		height: 200px;
+		background: -moz-linear-gradient(bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+		background: -webkit-gradient(linear, 0 top, 0 bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+		background: -o-linear-gradient(bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+	}
+
+	.read_more_btn {
+		cursor: pointer;
+		font-size: 32px;
+		color: #de686d;
+		background: #fff;
+		border-radius: 4px;
+		border: 1px solid #de686d;
+		line-height: 30px;
+		padding: 5px 10px;
+	}
+
+	.read_more_btn:hover {
+		background: #de686d;
+		color: #fff;
+	}
+
+	.open {
+		margin-bottom: 10px;
+		width: 100%;
+		height: 50px;
+		background-color: pink;
+		font-size: 24px;
+	}
+
+	/* 视频标签样式 */
+
+	.ql-video {
+		width: 100%;
+		height: 800px;
+	}
+</style>
+
+<body>
+	<div class="logo">
+		<img src="http://120.79.64.242:8886/imageWeb/2019-10-10/74631e94fa504e619e1a967bf218ab3b.jpg" alt="" />
+		<!-- <div class="news">资讯信息</div> -->
+	</div>
+	<div class="tit"></div>
+	<div class="header">
+		<div class="wenzi">发布时间：</div>
+		<div class="time">2019-10-10</div>
+		<image class="" src="http://120.79.64.242:8886/imageWeb/2019-10-10/916c22fc96814e979a106ed2cf9c1f32.jpg">
+			<div class="wenzi1">0</div>
+			<img src="http://120.79.64.242:8886/imageWeb/2019-10-10/fe025c5711f745378867218cfc88818e.jpg" alt="" />
+			<div class="wenzi2">0</div>
+		</image>
+	</div>
+	<div id="conten">
+		<img style="width: 100%;"
+			src="http://120.79.64.242:8886/imageWeb/2019-10-12/1966dbd4f10846c6b3836363d604b376.jpg" alt="" />
+		<div class="gao" style="height: 600px"></div>
+	</div>
+	<div class="readall_box">
+		<div class="read_more_mask"></div>
+		<a class="read_more_btn" target="_self" href="javascript:open_or_download_app();">
+			<!-- <img src="http://static.szyizhitong.com/imageWeb/2019-12-10/36f38143e09f41559af664b802dbdc4a.jpg" alt=""> -->
+			点击阅读全文
+		</a>
+	</div>
+
+	<div class="foot">
+		<div class="APP">
+			<img src="http://static.ezwtx.com/imageWeb/2019-10-29/e5ce0937d712454fa50c638bdb6c8a98.jpg" alt="" />
+			<div class="wenzi">
+				<a href="javascript:open_or_download_app();">下载纸网天下APP ></a>
+				<!-- <a class="tiao">下载纸网天下APP</a> -->
+			</div>
+			<span id="device"></span>
+		</div>
+		<!-- http://120.79.64.242:8886/imageWeb/2019-10-11/9144ab62063b4fbcb964e32a3bc3a9be.jpg -->
+		<div class="left">
+			<div class="lixian">联系我们</div>
+			<div class="lixian1">Contact us</div>
+			<div class="name">深圳市纸网天下网络科技有限公司</div>
+			<div class="dizhi">地址：南山区清华信息港科研楼521室</div>
+			<div class="iphone">电话：0755-86522439</div>
+			<div class="wangzhi">
+				平台网址：
+				<a href="http://www.ezwtx.com/">ezwtx.com</a>
+			</div>
+			<div class="model">客服：400-8827-008</div>
+		</div>
+		<div class="right">
+			<div class="guanzhu">关注官方小程序</div>
+			<!-- <div class="guanzhu">下载安卓APP</div>
+                <div class="guanzhu">下载苹果APP</div> -->
+			<img class="xiaochengxu"
+				src="http://120.79.64.242:8886/imageWeb/2019-10-11/9144ab62063b4fbcb964e32a3bc3a9be.jpg" alt="" />
+			<!-- <img class="anzhuo" src="http://static.ezwtx.com/imageWeb/2019-10-28/6865d24c49e84d7ca28fbcda9bcac78b.jpg" alt="">
+                <img class="ios" src="http://static.ezwtx.com/imageWeb/2019-10-28/b3fd40a61ede42e8a88f3f9bd586360b.jpg" alt=""> -->
+		</div>
+	</div>
+	<script type="text/javascript" src="./js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="./js/readmore.js"></script>
+	<script type="text/javascript">
+		//处理时间戳
+		function fn(time) {
+			var date = new Date(time);
+			var len = time.toString().length;
+			// 时间戳不足13位则在后面加零
+			if (len < 13) {
+				var sub = 13 - len;
+				sub = Math.pow(10, sub);
+				date = new Date(time * sub);
+			}
+			var y = date.getFullYear() + "-";
+			var M = date.getMonth() + 1;
+			M = (M < 10 ? "0" + M : M) + "-";
+			var d = date.getDate();
+			d = (d < 10 ? "0" + d : d) + " ";
+			var h = date.getHours();
+			h = (h < 10 ? "0" + h : h) + ":";
+			var m = date.getMinutes();
+			m = (m < 10 ? "0" + m : m) + ":";
+			var s = date.getSeconds();
+			s = s < 10 ? "0" + s : s;
+			// return y + M + d + h + m + s;
+			return y + M + d;
+		}
+
+		//获取url穿的值
+		function getUrlParam(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+			var r = window.location.search.substr(1).match(reg); //匹配目标参数
+			if (r != null) return unescape(r[2]);
+			return null; //返回参数值
+		}
+		// articleCateId !! 8 每日报价 9 头条新闻  10行业观察
+
+		//页面打开
+		$(document).ready(function () {
+			// var len = 80;      //默认显示字数
+			//    var ctn = document.getElementById("conten");  //获取div对象
+			//    console.log(ctn)
+			//    var conten = ctn.innerHTML;                   //获取div里的内容
+			//    console.log(conten.length)
+
+			//    //alert(content);
+			//    var span = document.createElement("span");     //创建<span>元素
+			//    var a = document.createElement("a");           //创建<a>元素
+			//    span.innerHTML = conten.substring(0,len);     //span里的内容为content的前len个字符
+
+			//    a.innerHTML = conten.length>len?"... 展开":"";  ////判断显示的字数是否大于默认显示的字数    来设置a的显示
+			//    a.href = "javascript:void(0)";//让a链接点击不跳转
+
+			//    a.onclick = function(){
+			//        if(a.innerHTML.indexOf("展开")>0){      //如果a中含有"展开"则显示"收起"
+			//          a.innerHTML = "<<&nbsp;收起";
+			//          span.innerHTML = conten;
+			//        }else{
+			//            a.innerHTML = "... 展开";
+			//            span.innerHTML = conten.substring(0,len);
+			//        }
+			//    }
+			//    // 设置div内容为空，span元素 a元素加入到div中
+			//    ctn.innerHTML = "";
+			//    ctn.appendChild(span);
+			//    ctn.appendChild(a);
+
+			var articleId = getUrlParam("articleId");
+			console.log(articleId);
+			// https://api.ezwtx.com/login/article/queryArticleInfo?articleId=702
+			// ajax  完整的写法
+
+			$.ajax({
+				type: "GET",
+				  url: "https://api.ezwtx.com/login/article/queryArticleInfo",
+				// url: 'https://szyizhitong.com/login/article/queryArticleInfo',
+				data: { articleId: articleId },
+				dataType: "json",
+				success: function (data) {
+					console.log(data);
+					//处理时间戳
+					var time = fn(data.data.articleTime);
+					console.log(time);
+					console.log(data.data.isFold);
+					var jj = data.data.isFold;
+					//浏览量
+					var aticleClick = data.data.aticleClick;
+					//点赞数
+					var aticleLove = data.data.aticleLove;
+
+					$(".wenzi1").each(function (e) {
+						$(this).html(aticleLove);
+					});
+					$(".wenzi2").each(function (e) {
+						$(this).html(aticleClick);
+					});
+					$("#conten").each(function (e) {
+						// element.style.height = '50px';
+						$(this).html(data.data.articleContent);
+					});
+					$(".tit").each(function (e) {
+						$(this).html(data.data.articleTitle);
+					});
+					$(".time").each(function (e) {
+						$(this).html(time);
+					});
+					if (jj != 0) {
+						var widHeight = $(window).height();
+						var artHeight = $("#conten").height();
+						console.log(widHeight);
+						console.log(artHeight);
+						if (artHeight > widHeight) {
+							// console.log(artHeight);
+							// console.log("没打印？");
+							$("#conten")
+								.height(widHeight * 1.2 - 785)
+								.css({ overflow: "hidden" });
+							var article_show = true;
+							$(".read_more_btn").on("click", bindRead_more);
+						} else {
+							// console.log("嗯哼");
+							article_show = true;
+							$(".readall_box")
+								.hide()
+								.addClass("readall_box_nobg");
+						}
+					} else {
+						//   console.log("这里没有折叠判断");
+						$("#conten").css({ height: "auto" });
+						article_show = true;
+						$(".readall_box")
+							.hide()
+							.addClass("readall_box_nobg");
+						return false;
+					}
+					function bindRead_more() {
+						if (!article_show) {
+							$("#conten")
+								.height(widHeight * 1.5)
+								.css({ overflow: "hidden" });
+							$(".readall_box")
+								.show()
+								.removeClass("readall_box_nobg");
+							article_show = true;
+							// console.log(show显示);
+						} else {
+							$("#conten")
+								.height("")
+								.css({ overflow: "hidden" });
+							$(".readall_box")
+								.show()
+								.addClass("readall_box_nobg");
+							$(".readall_box")
+								.hide()
+								.addClass("readall_box_nobg");
+							article_show = false;
+							// console.log(show不不不显示)
+						}
+					}
+				},
+				error: function (xhr, type) {
+					alert("Ajax error!");
+				}
+			});
+		});
+		//处理span行内样式
+		var interval = setInterval(function () {
+			console.log("调用iCheck");
+			if (document.readyState == "complete") {
+				//                 iCheck_box();
+				console.log(123123132);
+				var tags = document.body.getElementsByTagName("span");
+
+				for (var i = 0; i < tags.length; i++) {
+					tags[i].removeAttribute("style");
+				}
+				var tags1 = document.body.getElementsByTagName("section");
+
+				for (var i = 0; i < tags1.length; i++) {
+					// tags1[i].setAttribute("font-size","40px");
+					tags1[i].style.fontSize = 42 + 'px';
+
+				}
+				var tags2 = document.body.getElementsByTagName("p");
+				for (var i = 0; i < tags2.length; i++) {
+					// tags1[i].setAttribute("font-size","40px");
+					tags2[i].style.fontSize = 40 + 'px';
+					// tags2[i].style.lineHeight = "normal";
+					// tags2[i].style.lineHeight="initial";            
+					tags2[i].style.lineHeight=80 + "px";            
+				}
+				var tags3 = document.body.getElementsByTagName("img");
+				//   tags3.style.width="100%";
+				//处理视频得width
+				var tags4 = document.body.getElementsByTagName("iframe");
+				for (var i = 0; i < tags4.length; i++) {
+					tags4[i].removeAttribute("style")
+					tags4[i].style.width = "100%";
+					tags4[i].style.height = 600 + 'px';
+					// console.log(tags4[i])
+				}
+
+
+
+				clearInterval(interval);
+			}
+		}, 2000);
+		//   下载
+		function open_or_download_app() {
+			var device = document.getElementById("device");
+			if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+				// device.innerHTML = "ios设备";
+				// 判断useragent，当前设备为ios设备
+				var loadDateTime = new Date();
+				// 设置时间阈值，在规定时间里面没有打开对应App的话，直接去App store进行下载。
+				window.setTimeout(function () {
+					var timeOutDateTime = new Date();
+					if (timeOutDateTime - loadDateTime < 2200) {
+						window.location = "http://itunes.apple.com/app/id1475606097"; // APP下载地址
+					} else {
+						window.close();
+					}
+				}, 2000);
+				// window.location = "apptest://apptest";　　//ios端URL Schema
+				window.location = "apptest://apptest"; //ios端URL Schema
+				// window.location = "https://static.ezwtx.com/apple-app-site-association";　　//ios端URL Schema
+			} else if (navigator.userAgent.match(/android/i)) {
+				// device.innerHTML = "Android设备";
+				// 判断useragent，当前设备为Android设备
+				// 判断useragent，当前设备为ios设备
+				var loadDateTime = new Date();
+				// 设置时间阈值，在规定时间里面没有打开对应App的话，直接去App store进行下载。
+				window.setTimeout(function () {
+					var timeOutDateTime = new Date();
+					if (timeOutDateTime - loadDateTime < 2200) {
+						window.location =
+							"https://sj.qq.com/myapp/detail.htm?apkName=com.tjj.yizhitong"; // APP下载地址
+					} else {
+						window.close();
+					}
+				}, 2000);
+				window.location = "apptest://apptest"; // Android端URL Schema
+			}
+		}
+	</script>
+	<!-- <script type="text/javascript" charset="UTF-8" src="//res.cdn.openinstall.io/openinstall.js"></script>
+    <script type="text/javascript">
+        //openinstall初始化时将与openinstall服务器交互，应尽可能早的调用
+        /*web页面向app传递的json数据(json string/js Object)，应用被拉起或是首次安装时，通过相应的android/ios api可以获取此数据*/
+        var data = OpenInstall.parseUrlParams();//openinstall.js中提供的工具函数，解析url中的所有查询参数
+        new OpenInstall({
+            /*appKey必选参数，openinstall平台为每个应用分配的ID*/
+            appKey : "rmzqnw",
+            /*可选参数，自定义android平台的apk下载文件名；个别andriod浏览器下载时，中文文件名显示乱码，请慎用中文文件名！*/
+            //apkFileName : 'com.fm.openinstalldemo-v2.2.0.apk',
+            /*可选参数，是否优先考虑拉起app，以牺牲下载体验为代价*/
+            //preferWakeup:true,
+            /*自定义遮罩的html*/
+            //mask:function(){
+            //  return "<div id='openinstall_shadow' style='position:fixed;left:0;top:0;background:rgba(0,255,0,0.5);filter:alpha(opacity=50);width:100%;height:100%;z-index:10000;'></div>"
+            //},
+            /*openinstall初始化完成的回调函数，可选*/
+            onready : function() {
+                var m = this, button =$(".tiao");
+                button.style.visibility = "visible";
+    
+                /*在app已安装的情况尝试拉起app*/
+                m.schemeWakeup();
+                /*用户点击某个按钮时(假定按钮id为downloadButton)，安装app*/
+                button.onclick = function() {
+                    m.wakeupOrInstall();
+                    console.log(6685)
+                    return false;
+                }
+            }
+        }, data);
+    
+    </script> -->
+</body>
+
+</html>
