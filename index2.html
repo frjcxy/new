@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <a href="ceshi.html?articleId=710" articleId='710'>tiao</a>
+    <input id="input" type="text" >
+    <button id="btn">点击跳转</button>
+
+
+
+    <script type="text/javascript" src="./js/zepto.min.js"></script>
+    <script type="text/javascript">
+
+    $('#btn').click(function(){
+        console.log($(input.value))
+        var articleId = $("#input").val()
+        console.log(articleId)
+        window.location.href="index.html?articleId="+articleId
+    })
+    </script>
+</body>
+</html>
